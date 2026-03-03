@@ -12,10 +12,27 @@ const MusicPlayer = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
+  // Audio tracks with CDN URLs
+  // Replace these URLs with your actual CDN-hosted audio files
   const tracks = [
-    { title: 'Burn the Throne', artist: 'Go Lion', duration: 342 },
-    { title: 'Rise Again', artist: 'Go Lion', duration: 304 },
-    { title: 'Liberation Day', artist: 'Go Lion', duration: 393 },
+    {
+      title: 'Burn the Throne',
+      artist: 'Go Lion',
+      url: 'https://cdn.example.com/golion/burn-the-throne.mp3',
+      duration: 342
+    },
+    {
+      title: 'Rise Again',
+      artist: 'Go Lion',
+      url: 'https://cdn.example.com/golion/rise-again.mp3',
+      duration: 304
+    },
+    {
+      title: 'Liberation Day',
+      artist: 'Go Lion',
+      url: 'https://cdn.example.com/golion/liberation-day.mp3',
+      duration: 393
+    },
   ];
 
   useEffect(() => {
@@ -39,46 +56,95 @@ const MusicPlayer = () => {
     };
   }, []);
 
+  // Load and play track when currentTrack changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.src = tracks[currentTrack].url;
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play().catch(err => console.log('Playback prevented:', err));
+      }
+    }
+  }, [currentTrack]);
+
+  // Handle play/pause state
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch(err => console.log('Playback prevented:', err));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  // Handle volume and mute
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+      audioRef.current.muted = isMuted;
+    }
+  }, [volume, isMuted]);
+
+  // Update time from audio element
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => setDuration(audio.duration);
+    const handleEnded = () => {
+      nextTrack();
+      setIsPlaying(true);
+    };
+
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('ended', handleEnded);
+    };
+  }, [currentTrack]);
+
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
   };
 
   const previousTrack = () => {
     setCurrentTrack((prev) => (prev > 0 ? prev - 1 : tracks.length - 1));
-    setCurrentTime(0);
+    setIsPlaying(true);
   };
 
   const nextTrack = () => {
     setCurrentTrack((prev) => (prev < tracks.length - 1 ? prev + 1 : 0));
-    setCurrentTime(0);
+    setIsPlaying(true);
   };
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
 
+  const handleProgressClick = (e) => {
+    const progressBar = e.currentTarget;
+    const clickX = e.nativeEvent.offsetX;
+    const width = progressBar.offsetWidth;
+    const newTime = (clickX / width) * (duration || tracks[currentTrack].duration);
+
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
   const formatTime = (seconds) => {
+    if (!seconds || isNaN(seconds)) return '0:00';
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
-
-  // Simulate audio progress
-  useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentTime((prev) => {
-          if (prev >= tracks[currentTrack].duration) {
-            nextTrack();
-            return 0;
-          }
-          return prev + 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, currentTrack]);
 
   // Generate waveform bars
   const waveformBars = [...Array(60)].map(() => Math.random());
@@ -126,11 +192,15 @@ const MusicPlayer = () => {
               </div>
             </div>
 
+            {/* Hidden Audio Element */}
+            <audio ref={audioRef} preload="metadata" />
+
             {/* Waveform Visualization */}
             <div className="mb-8">
               <div className="flex items-end justify-center gap-1 h-32 bg-pan-black/50 rounded-lg p-4">
                 {waveformBars.map((height, i) => {
-                  const progress = currentTime / tracks[currentTrack].duration;
+                  const trackDuration = duration || tracks[currentTrack].duration;
+                  const progress = currentTime / trackDuration;
                   const isPast = i / waveformBars.length < progress;
                   return (
                     <div
@@ -156,16 +226,24 @@ const MusicPlayer = () => {
                 <span className="text-sm text-gray-400 font-lyrics">
                   {formatTime(currentTime)}
                 </span>
-                <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden cursor-pointer hover:h-3 transition-all"
+                  onClick={handleProgressClick}
+                  role="slider"
+                  aria-label="Seek position"
+                  aria-valuemin="0"
+                  aria-valuemax={duration || tracks[currentTrack].duration}
+                  aria-valuenow={currentTime}
+                >
                   <div
-                    className="h-full bg-gradient-to-r from-pan-red via-pan-gold to-pan-green transition-all duration-300"
+                    className="h-full bg-gradient-to-r from-pan-red via-pan-gold to-pan-green transition-all duration-100"
                     style={{
-                      width: `${(currentTime / tracks[currentTrack].duration) * 100}%`,
+                      width: `${(currentTime / (duration || tracks[currentTrack].duration)) * 100}%`,
                     }}
                   ></div>
                 </div>
                 <span className="text-sm text-gray-400 font-lyrics">
-                  {formatTime(tracks[currentTrack].duration)}
+                  {formatTime(duration || tracks[currentTrack].duration)}
                 </span>
               </div>
             </div>
