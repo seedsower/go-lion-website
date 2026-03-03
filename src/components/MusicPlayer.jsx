@@ -12,8 +12,14 @@ const MusicPlayer = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Audio tracks with Cloudflare R2 Public CDN URLs
+  // Audio tracks with Cloudflare R2 Public CDN URLs - Full Album
   const tracks = [
+    {
+      title: 'The Awakening (Intro)',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/The%20Awakening.mp3',
+      duration: 167
+    },
     {
       title: 'Burn the Throne',
       artist: 'Go Lion',
@@ -21,10 +27,64 @@ const MusicPlayer = () => {
       duration: 342
     },
     {
+      title: 'Breadline',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/_Breadline_.mp3',
+      duration: 264
+    },
+    {
+      title: 'Digital Babylon',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Digital%20Babylon.mp3',
+      duration: 296
+    },
+    {
+      title: "Mama's Hands",
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Mama%27s%20Hands.mp3',
+      duration: 248
+    },
+    {
+      title: 'Passport to Nowhere',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Passport%20to%20nowhere.mp3',
+      duration: 312
+    },
+    {
+      title: 'Concrete Garden',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/_Concrete%20Garden_.mp3',
+      duration: 238
+    },
+    {
+      title: 'The Algorithm',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/_The%20Algorithm_.mp3',
+      duration: 273
+    },
+    {
       title: 'Walls up High',
       artist: 'Go Lion',
       url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Walls%20up%20High.mp3',
       duration: 304
+    },
+    {
+      title: 'Battlefield',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/_Battlefield_.mp3',
+      duration: 287
+    },
+    {
+      title: 'Holy Ground',
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/_Holy%20Ground_.mp3',
+      duration: 321
+    },
+    {
+      title: "The Children's Eyes",
+      artist: 'Go Lion',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Childrens%20Eyes.mp3',
+      duration: 284
     },
     {
       title: 'Liberation Day',
