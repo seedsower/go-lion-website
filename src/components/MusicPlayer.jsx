@@ -17,19 +17,19 @@ const MusicPlayer = () => {
     {
       title: 'Burn the Throne',
       artist: 'Go Lion',
-      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/golion-audio/Full/burnthethrone.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/burnthethrone.mp3',
       duration: 342
     },
     {
       title: 'Walls up High',
       artist: 'Go Lion',
-      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/golion-audio/Full/Walls%20up%20High.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Walls%20up%20High.mp3',
       duration: 304
     },
     {
       title: 'Liberation Day',
       artist: 'Go Lion',
-      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/golion-audio/Full/Liberation%20Day.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/Full/Liberation%20Day.mp3',
       duration: 393
     },
   ];
