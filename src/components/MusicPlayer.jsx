@@ -12,24 +12,24 @@ const MusicPlayer = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Audio tracks with Cloudflare R2 CDN URLs
+  // Audio tracks with Cloudflare R2 Public CDN URLs
   const tracks = [
     {
       title: 'Burn the Throne',
       artist: 'Go Lion',
-      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/burn-the-throne.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/burn-the-throne.mp3',
       duration: 342
     },
     {
       title: 'Rise Again',
       artist: 'Go Lion',
-      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/rise-again.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/rise-again.mp3',
       duration: 304
     },
     {
       title: 'Liberation Day',
       artist: 'Go Lion',
-      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/liberation-day.mp3',
+      url: 'https://pub-e9c50e9620ca4743a202b88e622c18e8.r2.dev/liberation-day.mp3',
       duration: 393
     },
   ];
