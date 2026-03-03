@@ -12,25 +12,24 @@ const MusicPlayer = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Audio tracks with CDN URLs
-  // Replace these URLs with your actual CDN-hosted audio files
+  // Audio tracks with Cloudflare R2 CDN URLs
   const tracks = [
     {
       title: 'Burn the Throne',
       artist: 'Go Lion',
-      url: 'https://cdn.example.com/golion/burn-the-throne.mp3',
+      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/burn-the-throne.mp3',
       duration: 342
     },
     {
       title: 'Rise Again',
       artist: 'Go Lion',
-      url: 'https://cdn.example.com/golion/rise-again.mp3',
+      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/rise-again.mp3',
       duration: 304
     },
     {
       title: 'Liberation Day',
       artist: 'Go Lion',
-      url: 'https://cdn.example.com/golion/liberation-day.mp3',
+      url: 'https://bad01a348c24514c76d91efe5457b919.r2.cloudflarestorage.com/golion-audio/liberation-day.mp3',
       duration: 393
     },
   ];
