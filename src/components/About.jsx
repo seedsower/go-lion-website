@@ -89,11 +89,12 @@ const About = () => {
         </div>
 
         {/* Band Members Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
           {[
             { name: 'Marcus "Roar" Thompson', role: 'Lead Vocals & Rhythm Guitar', image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=400&fit=crop' },
             { name: 'Assata Williams', role: 'Bass & Backing Vocals', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop' },
             { name: 'Kwame "Thunder" Johnson', role: 'Drums & Percussion', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop' },
+            { name: 'Tornado T.', role: 'Maestro', image: '/GO LION/TT.png' },
           ].map((member, index) => (
             <div
               key={member.name}
