@@ -75,29 +75,22 @@ const Album = () => {
                 {/* Album Cover */}
                 <div className="aspect-square bg-gradient-to-br from-pan-red via-pan-gold to-pan-green p-1 rounded-lg shadow-2xl transform group-hover:scale-105 transition-all duration-500 animate-glow">
                   <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center relative overflow-hidden">
-                    {/* Placeholder Album Art */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center p-8">
-                        <div className="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-pan-gold to-pan-red rounded-full flex items-center justify-center">
-                          <svg
-                            viewBox="0 0 100 100"
-                            className="w-32 h-32 text-pan-black"
-                            fill="currentColor"
-                          >
-                            <path d="M50 10 L30 30 L20 15 L10 30 L5 20 L15 45 L10 50 L25 60 L15 75 L30 65 L35 80 L45 65 L50 75 L55 65 L65 80 L70 65 L85 75 L75 60 L90 50 L85 45 L95 20 L90 30 L80 15 L70 30 L50 10 Z" />
-                            <circle cx="50" cy="50" r="15" />
-                            <text x="50" y="95" textAnchor="middle" className="text-[8px] fill-pan-gold font-display">BURN THE THRONE</text>
-                          </svg>
-                        </div>
-                        <h3 className="text-4xl font-display font-bold text-white mb-2">
-                          GO LION
-                        </h3>
-                        <p className="text-2xl text-pan-gold font-semibold">
-                          Burn the Throne
-                        </p>
-                      </div>
+                    {/* Album Artwork - Lion with Burning Throne */}
+                    <img
+                      src="/GO LION/lion-burning-throne.png"
+                      alt="Go Lion - Burn the Throne Album Cover"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-pan-black/40 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+                      <h3 className="text-4xl font-display font-bold text-white mb-2 drop-shadow-lg">
+                        GO LION
+                      </h3>
+                      <p className="text-2xl text-pan-gold font-semibold drop-shadow-lg">
+                        Burn the Throne
+                      </p>
                     </div>
-                    <div className="absolute inset-0 noise-overlay"></div>
+                    <div className="absolute inset-0 noise-overlay opacity-20"></div>
                   </div>
                 </div>
 

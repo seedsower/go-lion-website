@@ -44,16 +44,15 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 section-container">
         <div ref={logoRef} className="transition-transform duration-200 ease-out">
-          {/* Lion Logo/Icon */}
+          {/* Lion Logo - Roaring Lion */}
           <div className="mb-8 flex justify-center">
-            <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-pan-gold to-pan-red rounded-full flex items-center justify-center animate-pulse-slow shadow-[0_0_60px_rgba(255,215,0,0.4)]">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-20 h-20 md:w-24 md:h-24 text-pan-black"
-                fill="currentColor"
-              >
-                <path d="M50 20 L35 35 L30 25 L25 35 L20 30 L25 45 L20 50 L30 55 L25 65 L35 60 L40 70 L45 60 L50 65 L55 60 L60 70 L65 60 L70 65 L75 55 L80 50 L75 45 L80 30 L75 35 L70 25 L65 35 L50 20 Z M50 40 C55 40 60 45 60 50 C60 55 55 60 50 60 C45 60 40 55 40 50 C40 45 45 40 50 40 Z" />
-              </svg>
+            <div className="w-48 h-48 md:w-64 md:h-64 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-pan-gold to-pan-red rounded-full blur-xl opacity-50 animate-pulse-slow"></div>
+              <img
+                src="/GO LION/roaring-lion.png"
+                alt="Go Lion - Roaring Lion Logo"
+                className="relative w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,215,0,0.6)] animate-float"
+              />
             </div>
           </div>
 

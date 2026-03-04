@@ -50,6 +50,17 @@ const About = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-pan-red via-pan-gold to-pan-green mx-auto"></div>
         </div>
 
+        {/* Vintage Lion Circle Logo */}
+        <div className={`flex justify-center mb-16 ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.15s' }}>
+          <div className="w-48 h-48 md:w-64 md:h-64 relative">
+            <img
+              src="/GO LION/vintage-lion-circle.png"
+              alt="Go Lion Vintage Logo"
+              className="w-full h-full object-contain drop-shadow-2xl animate-float"
+            />
+          </div>
+        </div>
+
         {/* Mission Statement */}
         <div className={`max-w-4xl mx-auto mb-20 ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed text-center mb-8">

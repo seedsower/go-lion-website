@@ -230,10 +230,12 @@ const MusicPlayer = () => {
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               {/* Album Art Thumbnail */}
               <div className="w-32 h-32 bg-gradient-to-br from-pan-red via-pan-gold to-pan-green p-1 rounded-lg shadow-lg flex-shrink-0">
-                <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center">
-                  <svg viewBox="0 0 100 100" className="w-20 h-20 text-pan-gold" fill="currentColor">
-                    <path d="M50 20 L35 35 L30 25 L25 35 L20 30 L25 45 L20 50 L30 55 L25 65 L35 60 L40 70 L45 60 L50 65 L55 60 L60 70 L65 60 L70 65 L75 55 L80 50 L75 45 L80 30 L75 35 L70 25 L65 35 L50 20 Z M50 40 C55 40 60 45 60 50 C60 55 55 60 50 60 C45 60 40 55 40 50 C40 45 45 40 50 40 Z" />
-                  </svg>
+                <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/GO LION/geometric-lion.png"
+                    alt="Go Lion Album Art"
+                    className="w-full h-full object-cover rounded-lg"
+                  />
                 </div>
               </div>
 
