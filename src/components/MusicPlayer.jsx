@@ -292,8 +292,8 @@ const MusicPlayer = () => {
               <div className="w-32 h-32 bg-gradient-to-br from-pan-red via-pan-gold to-pan-green p-1 rounded-lg shadow-lg flex-shrink-0">
                 <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center overflow-hidden">
                   <img
-                    src="/GO LION/geometric-lion.png"
-                    alt="Go Lion Album Art"
+                    src="/GO LION/lion-burning-throne.png"
+                    alt="Go Lion - Burn the Throne Album Art"
                     className="w-full h-full object-cover rounded-lg"
                   />
                 </div>
