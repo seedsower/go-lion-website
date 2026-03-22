@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Shuffle, Repeat, Repeat1, ListMusic } from 'lucide-react';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -8,9 +8,12 @@ const MusicPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState('off'); // 'off', 'all', 'one'
   const audioRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const [playHistory, setPlayHistory] = useState([]);
 
   // Audio tracks with Cloudflare R2 Public CDN URLs - Full Album
   const tracks = [
@@ -173,17 +176,74 @@ const MusicPlayer = () => {
   };
 
   const previousTrack = () => {
-    setCurrentTrack((prev) => (prev > 0 ? prev - 1 : tracks.length - 1));
+    if (shuffle && playHistory.length > 0) {
+      // Go back in shuffle history
+      const newHistory = [...playHistory];
+      const previousIndex = newHistory.pop();
+      setPlayHistory(newHistory);
+      setCurrentTrack(previousIndex);
+    } else {
+      setCurrentTrack((prev) => (prev > 0 ? prev - 1 : tracks.length - 1));
+    }
     setIsPlaying(true);
   };
 
   const nextTrack = () => {
-    setCurrentTrack((prev) => (prev < tracks.length - 1 ? prev + 1 : 0));
+    if (repeat === 'one') {
+      // Repeat current track - restart it
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+      return;
+    }
+
+    if (shuffle) {
+      // Shuffle mode - pick random track
+      setPlayHistory([...playHistory, currentTrack]);
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * tracks.length);
+      } while (nextIndex === currentTrack && tracks.length > 1);
+      setCurrentTrack(nextIndex);
+    } else {
+      // Normal or repeat all mode
+      const nextIndex = currentTrack + 1;
+      if (nextIndex >= tracks.length) {
+        if (repeat === 'all') {
+          setCurrentTrack(0);
+        } else {
+          setIsPlaying(false);
+          return;
+        }
+      } else {
+        setCurrentTrack(nextIndex);
+      }
+    }
     setIsPlaying(true);
   };
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
+  };
+
+  const toggleShuffle = () => {
+    setShuffle(!shuffle);
+    setPlayHistory([]);
+  };
+
+  const toggleRepeat = () => {
+    const modes = ['off', 'all', 'one'];
+    const currentIndex = modes.indexOf(repeat);
+    const nextIndex = (currentIndex + 1) % modes.length;
+    setRepeat(modes[nextIndex]);
+  };
+
+  const playAll = () => {
+    setCurrentTrack(0);
+    setIsPlaying(true);
+    setRepeat('all');
+    setShuffle(false);
   };
 
   const handleProgressClick = (e) => {
@@ -307,6 +367,42 @@ const MusicPlayer = () => {
                   {formatTime(duration || tracks[currentTrack].duration)}
                 </span>
               </div>
+            </div>
+
+            {/* Additional Controls */}
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <button
+                onClick={playAll}
+                className="flex items-center gap-2 px-4 py-2 bg-pan-gold/10 hover:bg-pan-gold/20 border border-pan-gold/30 hover:border-pan-gold rounded-lg text-pan-gold transition-all"
+                aria-label="Play all tracks"
+              >
+                <ListMusic size={20} />
+                <span className="font-semibold">Play All</span>
+              </button>
+              <button
+                onClick={toggleShuffle}
+                className={`p-3 rounded-lg transition-all ${
+                  shuffle
+                    ? 'bg-pan-gold text-pan-black'
+                    : 'bg-pan-black/50 hover:bg-pan-gold/20 text-gray-400 hover:text-pan-gold border border-pan-gold/30'
+                }`}
+                aria-label={shuffle ? 'Shuffle on' : 'Shuffle off'}
+                title={shuffle ? 'Shuffle: On' : 'Shuffle: Off'}
+              >
+                <Shuffle size={20} />
+              </button>
+              <button
+                onClick={toggleRepeat}
+                className={`p-3 rounded-lg transition-all ${
+                  repeat !== 'off'
+                    ? 'bg-pan-gold text-pan-black'
+                    : 'bg-pan-black/50 hover:bg-pan-gold/20 text-gray-400 hover:text-pan-gold border border-pan-gold/30'
+                }`}
+                aria-label={`Repeat: ${repeat}`}
+                title={`Repeat: ${repeat === 'off' ? 'Off' : repeat === 'all' ? 'All' : 'One'}`}
+              >
+                {repeat === 'one' ? <Repeat1 size={20} /> : <Repeat size={20} />}
+              </button>
             </div>
 
             {/* Controls */}
