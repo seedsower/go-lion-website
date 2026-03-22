@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Music, ExternalLink } from 'lucide-react';
+import { Music } from 'lucide-react';
 
 const Album = () => {
   const sectionRef = useRef(null);
@@ -20,14 +20,6 @@ const Album = () => {
     { number: 11, title: 'Holy Ground', duration: '5:21', lyric: '"Wherever the people stand, that is holy ground..."' },
     { number: 12, title: "The Children's Eyes", duration: '4:44', lyric: '"The future watches, waiting for our truth..."' },
     { number: 13, title: 'Liberation Day', duration: '6:33', lyric: '"When the last chain breaks, we all go free..."' },
-  ];
-
-  const streamingPlatforms = [
-    { name: 'Spotify', icon: '🎵', url: '#' },
-    { name: 'Apple Music', icon: '🍎', url: '#' },
-    { name: 'YouTube Music', icon: '▶️', url: '#' },
-    { name: 'Tidal', icon: '🌊', url: '#' },
-    { name: 'Amazon Music', icon: '📦', url: '#' },
   ];
 
   useEffect(() => {
@@ -111,40 +103,6 @@ const Album = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Streaming Platforms */}
-              <div className="mt-8">
-                <h4 className="text-xl font-display font-bold text-white mb-4 text-center">
-                  Stream Now On
-                </h4>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {streamingPlatforms.map((platform) => (
-                    <a
-                      key={platform.name}
-                      href={platform.url}
-                      className="flex items-center gap-2 px-4 py-2 bg-pan-black/50 border border-pan-gold/30 rounded-lg hover:border-pan-gold hover:bg-pan-gold/10 transition-all duration-300 group"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="text-2xl">{platform.icon}</span>
-                      <span className="text-sm font-semibold text-gray-300 group-hover:text-pan-gold transition-colors">
-                        {platform.name}
-                      </span>
-                      <ExternalLink size={14} className="text-gray-500 group-hover:text-pan-gold transition-colors" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pre-order Vinyl */}
-              <div className="mt-8 text-center">
-                <button className="btn-primary w-full md:w-auto">
-                  Pre-Order Limited Edition Vinyl
-                </button>
-                <p className="text-sm text-gray-400 mt-3">
-                  180g Gold & Red Splatter • Only 500 Copies
-                </p>
               </div>
             </div>
           </div>
@@ -235,40 +193,6 @@ const Album = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Streaming Platforms */}
-              <div className="mt-8">
-                <h4 className="text-xl font-display font-bold text-white mb-4 text-center">
-                  Stream Now On
-                </h4>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {streamingPlatforms.map((platform) => (
-                    <a
-                      key={platform.name}
-                      href={platform.url}
-                      className="flex items-center gap-2 px-4 py-2 bg-pan-black/50 border border-pan-gold/30 rounded-lg hover:border-pan-gold hover:bg-pan-gold/10 transition-all duration-300 group"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="text-2xl">{platform.icon}</span>
-                      <span className="text-sm font-semibold text-gray-300 group-hover:text-pan-gold transition-colors">
-                        {platform.name}
-                      </span>
-                      <ExternalLink size={14} className="text-gray-500 group-hover:text-pan-gold transition-colors" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pre-order Vinyl */}
-              <div className="mt-8 text-center">
-                <button className="btn-primary w-full md:w-auto">
-                  Pre-Order Limited Edition Vinyl
-                </button>
-                <p className="text-sm text-gray-400 mt-3">
-                  180g Gold & Green Splatter • Only 500 Copies
-                </p>
               </div>
             </div>
           </div>
