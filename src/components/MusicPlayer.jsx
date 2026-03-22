@@ -10,13 +10,14 @@ const MusicPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState('off'); // 'off', 'all', 'one'
+  const [currentAlbum, setCurrentAlbum] = useState('burnTheThrone'); // 'burnTheThrone' or 'liberationFrequency'
   const audioRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const [playHistory, setPlayHistory] = useState([]);
 
-  // Audio tracks with Cloudflare R2 Public CDN URLs - Full Album
-  const tracks = [
+  // Album: Burn the Throne
+  const burnTheThroneTracksData = [
     {
       title: 'The Awakening (Intro)',
       artist: 'Go Lion',
@@ -96,6 +97,120 @@ const MusicPlayer = () => {
       duration: 393
     },
   ];
+
+  // Album: Liberation Frequency
+  const liberationFrequencyTracksData = [
+    {
+      title: 'Ancestors in My Blood',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Ancestors%20in%20My%20Blood_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Build It Back',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Build%20It%20Back_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Dancing on the Ashes',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Dancing%20on%20the%20Ashes_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Digital Soldier',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Digital%20Soldier_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Divide and Fall',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Divide%20and%20Fall_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Forgive Me, Father',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Forgive%20Me%2C%20Father_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Letter to My Son',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Letter%20to%20My%20Son_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Love Is the Weapon',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Love%20Is%20the%20Weapon_.mp3',
+      duration: 240
+    },
+    {
+      title: 'One Frequency',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_One%20Frequency_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Prodigal',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Prodigal_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Sunday Morning Kitchen',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Sunday%20Morning%20Kitchen_.mp3',
+      duration: 240
+    },
+    {
+      title: 'Tend Your Garden',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_Tend%20Your%20Garden_.mp3',
+      duration: 240
+    },
+    {
+      title: 'The Frequency',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_The%20Frequency_.mp3',
+      duration: 240
+    },
+    {
+      title: 'The Healers',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_The%20Healers_.mp3',
+      duration: 240
+    },
+    {
+      title: 'The Wound That Made Me',
+      artist: 'Go Lion',
+      url: 'https://pub-24a857576bb74ba1916df6f252095ece.r2.dev/_The%20Wound%20That%20Made%20Me_.mp3',
+      duration: 240
+    },
+  ];
+
+  // Albums configuration
+  const albums = {
+    burnTheThrone: {
+      name: 'Burn the Throne',
+      tracks: burnTheThroneTracksData,
+      artwork: '/GO LION/lion-burning-throne.png',
+      artworkAlt: 'Go Lion - Burn the Throne Album Cover'
+    },
+    liberationFrequency: {
+      name: 'Liberation Frequency',
+      tracks: liberationFrequencyTracksData,
+      artwork: '/GO LION/liberationfrequency.png',
+      artworkAlt: 'Go Lion - Liberation Frequency Album Cover'
+    }
+  };
+
+  // Get current album data
+  const currentAlbumData = albums[currentAlbum];
+  const tracks = currentAlbumData.tracks;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -246,6 +361,13 @@ const MusicPlayer = () => {
     setShuffle(false);
   };
 
+  const switchAlbum = (albumKey) => {
+    setCurrentAlbum(albumKey);
+    setCurrentTrack(0);
+    setIsPlaying(false);
+    setCurrentTime(0);
+  };
+
   const handleProgressClick = (e) => {
     const progressBar = e.currentTarget;
     const clickX = e.nativeEvent.offsetX;
@@ -286,14 +408,39 @@ const MusicPlayer = () => {
         {/* Music Player */}
         <div className={`max-w-4xl mx-auto ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
           <div className="bg-gradient-to-br from-pan-black via-gray-900 to-pan-black border-2 border-pan-gold/30 rounded-2xl p-8 md:p-12 shadow-2xl noise-overlay">
+
+            {/* Album Switcher */}
+            <div className="flex justify-center gap-4 mb-8">
+              <button
+                onClick={() => switchAlbum('burnTheThrone')}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  currentAlbum === 'burnTheThrone'
+                    ? 'bg-gradient-to-r from-pan-gold to-pan-red text-pan-black shadow-lg'
+                    : 'bg-pan-black/50 text-gray-400 border border-pan-gold/30 hover:border-pan-gold hover:text-pan-gold'
+                }`}
+              >
+                Burn the Throne
+              </button>
+              <button
+                onClick={() => switchAlbum('liberationFrequency')}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  currentAlbum === 'liberationFrequency'
+                    ? 'bg-gradient-to-r from-pan-gold to-pan-red text-pan-black shadow-lg'
+                    : 'bg-pan-black/50 text-gray-400 border border-pan-gold/30 hover:border-pan-gold hover:text-pan-gold'
+                }`}
+              >
+                Liberation Frequency
+              </button>
+            </div>
+
             {/* Album Art & Track Info */}
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               {/* Album Art Thumbnail */}
               <div className="w-32 h-32 bg-gradient-to-br from-pan-red via-pan-gold to-pan-green p-1 rounded-lg shadow-lg flex-shrink-0">
                 <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center overflow-hidden">
                   <img
-                    src="/GO LION/lion-burning-throne.png"
-                    alt="Go Lion - Burn the Throne Album Art"
+                    src={currentAlbumData.artwork}
+                    alt={currentAlbumData.artworkAlt}
                     className="w-full h-full object-cover rounded-lg"
                   />
                 </div>
@@ -302,7 +449,7 @@ const MusicPlayer = () => {
               {/* Track Info */}
               <div className="flex-1 text-center md:text-left">
                 <p className="text-sm text-gray-400 uppercase tracking-wider mb-2">
-                  Now Playing
+                  Now Playing • {currentAlbumData.name}
                 </p>
                 <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
                   {tracks[currentTrack].title}
