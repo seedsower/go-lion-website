@@ -155,27 +155,6 @@ const MerchPreview = () => {
             Free shipping on orders over $75 • 100% organic cotton apparel
           </p>
         </div>
-
-        {/* Featured Collection Banner */}
-        <div className={`mt-16 bg-gradient-to-r from-pan-red via-pan-gold to-pan-green p-1 rounded-lg ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
-          <div className="bg-pan-black rounded-lg p-8 md:p-12 text-center">
-            <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-              Limited Edition Vinyl
-            </h3>
-            <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
-              180g Gold & Red Splatter pressing. Only 500 copies worldwide.
-              Includes exclusive poster and download code.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary">
-                Pre-Order Now - $34.99
-              </button>
-              <button className="btn-secondary">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
