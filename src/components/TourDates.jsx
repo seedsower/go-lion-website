@@ -230,18 +230,6 @@ const TourDates = () => {
             </div>
           )}
         </div>
-
-        {/* Map Visualization Placeholder */}
-        <div className={`mt-16 max-w-6xl mx-auto ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
-          <div className="aspect-[16/9] bg-pan-black/50 border border-pan-gold/30 rounded-lg overflow-hidden relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="text-pan-gold mx-auto mb-4" size={48} />
-                <p className="text-gray-400 text-lg">Interactive Tour Map Coming Soon</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
