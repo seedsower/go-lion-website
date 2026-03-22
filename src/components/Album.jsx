@@ -61,11 +61,20 @@ const Album = () => {
         {/* Section Header */}
         <div className={`text-center mb-16 ${isVisible ? 'animate-in' : 'opacity-0'}`}>
           <h2 className="text-5xl md:text-7xl font-display font-bold text-gradient mb-6">
-            Burn the Throne
+            Discography
           </h2>
-          <p className="text-xl md:text-2xl text-gray-300">The Debut Album</p>
+          <p className="text-xl md:text-2xl text-gray-300">Albums & Releases</p>
           <div className="w-24 h-1 bg-gradient-to-r from-pan-red via-pan-gold to-pan-green mx-auto mt-6"></div>
         </div>
+
+        {/* Album: Burn the Throne */}
+        <div className="mb-32">
+          <div className={`text-center mb-12 ${isVisible ? 'animate-in' : 'opacity-0'}`}>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-3">
+              Burn the Throne
+            </h3>
+            <p className="text-lg md:text-xl text-gray-400">The Debut Album</p>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Album Artwork */}
@@ -188,6 +197,100 @@ const Album = () => {
               <span className="text-pan-gold font-display font-bold text-xl">61:13</span>
             </div>
           </div>
+        </div>
+        </div>
+
+        {/* Album: Liberation Frequency */}
+        <div className="mb-16">
+          <div className={`text-center mb-12 ${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-3">
+              Liberation Frequency
+            </h3>
+            <p className="text-lg md:text-xl text-gray-400">The New Album</p>
+          </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Album Artwork */}
+          <div className={`${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
+            <div className="sticky top-24">
+              <div className="relative group">
+                {/* Album Cover */}
+                <div className="aspect-square bg-gradient-to-br from-pan-red via-pan-gold to-pan-green p-1 rounded-lg shadow-2xl transform group-hover:scale-105 transition-all duration-500 animate-glow">
+                  <div className="w-full h-full bg-pan-black rounded-lg flex items-center justify-center relative overflow-hidden">
+                    {/* Album Artwork - Liberation Frequency Phoenix */}
+                    <img
+                      src="/GO LION/liberationfrequency.png"
+                      alt="Go Lion - Liberation Frequency Album Cover"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 noise-overlay opacity-20"></div>
+                  </div>
+                </div>
+
+                {/* Vinyl Record Peek */}
+                <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-64 h-64 hidden lg:block">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-pan-black via-gray-900 to-pan-black shadow-2xl opacity-0 group-hover:opacity-100 group-hover:translate-x-12 transition-all duration-500">
+                    <div className="absolute inset-8 rounded-full bg-pan-gold flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-pan-black"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Streaming Platforms */}
+              <div className="mt-8">
+                <h4 className="text-xl font-display font-bold text-white mb-4 text-center">
+                  Stream Now On
+                </h4>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {streamingPlatforms.map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      className="flex items-center gap-2 px-4 py-2 bg-pan-black/50 border border-pan-gold/30 rounded-lg hover:border-pan-gold hover:bg-pan-gold/10 transition-all duration-300 group"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-2xl">{platform.icon}</span>
+                      <span className="text-sm font-semibold text-gray-300 group-hover:text-pan-gold transition-colors">
+                        {platform.name}
+                      </span>
+                      <ExternalLink size={14} className="text-gray-500 group-hover:text-pan-gold transition-colors" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pre-order Vinyl */}
+              <div className="mt-8 text-center">
+                <button className="btn-primary w-full md:w-auto">
+                  Pre-Order Limited Edition Vinyl
+                </button>
+                <p className="text-sm text-gray-400 mt-3">
+                  180g Gold & Green Splatter • Only 500 Copies
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Coming Soon Message */}
+          <div className={`${isVisible ? 'animate-in' : 'opacity-0'}`} style={{ animationDelay: '1.2s' }}>
+            <div className="h-full flex flex-col items-center justify-center text-center p-8">
+              <div className="w-32 h-32 mb-8 bg-gradient-to-br from-pan-gold to-pan-red rounded-full flex items-center justify-center animate-pulse-slow">
+                <Music className="text-pan-black" size={64} />
+              </div>
+              <h3 className="text-3xl font-display font-bold text-white mb-4">
+                Coming Soon
+              </h3>
+              <p className="text-xl text-gray-300 mb-8 max-w-md">
+                The phoenix rises with a new frequency of liberation. Full tracklist and details dropping soon.
+              </p>
+              <button className="btn-secondary">
+                Get Notified
+              </button>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </section>
