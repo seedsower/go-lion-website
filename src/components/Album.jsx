@@ -1,10 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Music } from 'lucide-react';
+import { Music, ExternalLink } from 'lucide-react';
 
 const Album = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredTrack, setHoveredTrack] = useState(null);
+
+  const streamingPlatforms = [
+    { name: 'Spotify', icon: '🎵', url: '#' },
+    { name: 'Apple Music', icon: '🍎', url: '#' },
+    { name: 'YouTube Music', icon: '▶️', url: '#' },
+    { name: 'Tidal', icon: '🌊', url: '#' },
+    { name: 'Amazon Music', icon: '📦', url: '#' },
+  ];
 
   const tracks = [
     { number: 1, title: 'The Awakening (Intro)', duration: '2:47', lyric: '"Open your eyes... the throne is burning..."' },
@@ -104,6 +112,30 @@ const Album = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Streaming Platforms */}
+              <div className="mt-8">
+                <h4 className="text-xl font-display font-bold text-white mb-4 text-center">
+                  Stream Now On
+                </h4>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {streamingPlatforms.map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      className="flex items-center gap-2 px-4 py-2 bg-pan-black/50 border border-pan-gold/30 rounded-lg hover:border-pan-gold hover:bg-pan-gold/10 transition-all duration-300 group"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-2xl">{platform.icon}</span>
+                      <span className="text-sm font-semibold text-gray-300 group-hover:text-pan-gold transition-colors">
+                        {platform.name}
+                      </span>
+                      <ExternalLink size={14} className="text-gray-500 group-hover:text-pan-gold transition-colors" />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -192,6 +224,30 @@ const Album = () => {
                       <div className="w-16 h-16 rounded-full bg-pan-black"></div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Streaming Platforms */}
+              <div className="mt-8">
+                <h4 className="text-xl font-display font-bold text-white mb-4 text-center">
+                  Stream Now On
+                </h4>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {streamingPlatforms.map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      className="flex items-center gap-2 px-4 py-2 bg-pan-black/50 border border-pan-gold/30 rounded-lg hover:border-pan-gold hover:bg-pan-gold/10 transition-all duration-300 group"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-2xl">{platform.icon}</span>
+                      <span className="text-sm font-semibold text-gray-300 group-hover:text-pan-gold transition-colors">
+                        {platform.name}
+                      </span>
+                      <ExternalLink size={14} className="text-gray-500 group-hover:text-pan-gold transition-colors" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
