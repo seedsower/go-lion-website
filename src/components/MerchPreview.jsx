@@ -49,6 +49,14 @@ const MerchPreview = () => {
       image: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=500&h=500&fit=crop',
       category: 'Accessories',
     },
+    {
+      id: 7,
+      name: 'Go Lion "Liberation Frequency" T-Shirt',
+      price: '$29.99',
+      image: '/GO LION/liberationtee.png',
+      category: 'Apparel',
+      badge: 'New',
+    },
   ];
 
   useEffect(() => {
